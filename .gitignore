@@ -1,2 +1,7 @@
 # 忽略 config.py 文件
 config.py
+.gradio/
+.venv/
+src/__pycache__/
+__pycache__/
+venv/
