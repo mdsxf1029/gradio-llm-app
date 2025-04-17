@@ -6,15 +6,14 @@ import gradio as gr
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
-from .api_handler import get_chat_response  # 导入流式响应函数
-
-# 全局变量，用于存储所有对话历史
-all_conversations = []
+from src.api_handler import get_chat_response  # 导入流式响应函数
 
 # 聊天功能处理函数
 def chat_with_ai(user_input, state=None):
     if state is None:
         state = []
+
+    print(f"State type: {type(state)}")  # 调试信息
 
     # 添加用户输入到对话历史
     state.append((user_input, "Thinking..."))

@@ -1,7 +1,7 @@
 import sys
 import os
 import gradio as gr
-from src.ui import build_ui  # 从 ui.py 引入构建界面的方法
+from ui import build_ui  # 从 ui.py 引入构建界面的方法
 
 # 设置Gradio界面
 def launch_app():

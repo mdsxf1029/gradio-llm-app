@@ -2,6 +2,8 @@
 
 import gradio as gr
 from src.chatbot import chat_with_ai  # 导入聊天逻辑函数
+from src.globals import current_model
+from src.api_handler import set_current_model  # 导入设置模型函数
 
 # 构建美化后的 Gradio 用户界面
 def build_ui():
@@ -42,7 +44,7 @@ def build_ui():
         # 模型选择下拉框
         model_selector = gr.Dropdown(
             choices=["DeepSeek-R1", "qwen-plus"],  # 模型选项
-            value="qwen-plus",  # 默认值
+            value="DeepSeek-R1",  # 默认值
             label="Select Model",
             elem_id="model_selector"
         )
@@ -62,14 +64,11 @@ def build_ui():
             clear_button = gr.Button("Clear Chat", elem_id="clear_button", variant="secondary")
 
         # 选择模型后更新当前模型
-        def set_current_model(selected_model):
-            return {"model": selected_model}
-
-        model_selector.change(set_current_model, inputs=model_selector, outputs=state)
+        model_selector.change(set_current_model, inputs=model_selector, outputs=[])
 
         # 清空聊天记录函数
         def clear_chat():
-            return "", gr.update(value=[], visible=False)  # 清空聊天记录
+            return "", []  # 清空聊天记录
 
         # 点击清空按钮清除聊天记录
         clear_button.click(clear_chat, inputs=[], outputs=[chatbot, state])

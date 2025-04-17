@@ -6,9 +6,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
 from config import openai_client, qwen_client
-
-# 全局变量，用于存储当前选定的模型
-current_model = "qwen-plus"  # 默认模型，可以设置为 "通义千问-Plus" 或其他
+from src.globals import current_model
 
 def set_current_model(model_name):
     global current_model
@@ -16,26 +14,20 @@ def set_current_model(model_name):
         raise ValueError("Invalid model name. Choose 'DeepSeek-R1' or 'qwen-plus'.")
     current_model = model_name
 
-def get_chat_response(user_input, history):
+def get_chat_response(user_input, state):
     # 根据用户选择调用相应的 API
     global current_model
 
     if current_model == "DeepSeek-R1":
         chat_completion = openai_client.chat.completions.create(
             model="DeepSeek-R1",  # 替换为你的模型名称
-            messages=[{
-            "role": "user",
-            "content": user_input,
-        }],
+            messages=[{"role": "user", "content": user_input}],
             stream=True
         )
     elif current_model == "qwen-plus":
         chat_completion = qwen_client.chat.completions.create(
             model="qwen-plus",  # 替换为你的模型名称
-            messages=[{
-            "role": "user",
-            "content": user_input,
-        }],
+            messages=[{"role": "user", "content": user_input}],
             stream=True
         )
     else:
