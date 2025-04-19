@@ -17,6 +17,9 @@
 ├── README.md             # 项目说明文件（本文件）
 ```
 
+## 🖥️ 集成开发环境
+- VS Code
+
 ## 🚀 运行方式
 
 1. **克隆项目：**
@@ -50,7 +53,7 @@ pip install -r requirements.txt
 在 `config.py` 文件中，设置你所使用模型的 API key。示例：
 
 ```python
-api_key = "your_api_key_here",   # 替换为你的API密钥
+api_key = "your_api_key_here"    # 替换为你的API密钥
 base_url = "your_base_url_here"
 ```
 
